@@ -1,0 +1,37 @@
+{
+  "segmentation": {
+    "model": "kmeans_segmentation.joblib",
+    "scaler": "kmeans_scaler.joblib",
+    "segment_names": "segment_names.json",
+    "input_features": [
+      "recency",
+      "frequency",
+      "monetary_log"
+    ],
+    "notes": "monetary_log = log1p(monetary). Scale with kmeans_scaler before predicting."
+  },
+  "churn_risk": {
+    "model": "churn_gb_tuned.joblib",
+    "input_features": [
+      "frequency",
+      "monetary_log",
+      "avg_review_score",
+      "avg_delivery_days",
+      "on_time_rate",
+      "avg_payment_installments"
+    ],
+    "target_definition": "no purchase in the last 180 days",
+    "notes": "Tree-based - no scaling needed. recency intentionally excluded (label leakage).",
+    "alternative_model": {
+      "model": "churn_model_rf_tuned.joblib",
+      "scaler": "churn_scaler.joblib",
+      "target_definition": "customer has placed exactly one order ever",
+      "notes": "Kept for reference - ~97% positive rate makes this hard to act on."
+    }
+  },
+  "repeat_purchase": {
+    "model": "repeat_purchase_svm.joblib",
+    "input_features": "see repeat_purchase_feature_cols.json",
+    "notes": "Pipeline includes its own scaling/encoding - pass raw first-order values in."
+  }
+}

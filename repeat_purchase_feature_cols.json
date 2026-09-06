@@ -1,0 +1,13 @@
+{
+  "numeric": [
+    "price_capped",
+    "freight_value",
+    "payment_installments"
+  ],
+  "categorical": [
+    "payment_type",
+    "product_category_name",
+    "customer_state",
+    "on_time"
+  ]
+}
